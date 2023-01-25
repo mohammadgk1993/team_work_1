@@ -1,13 +1,13 @@
 $(document).ready(function() {
     let countries = []
 
-    getCountries()
+    getCountries(countries)
 
     for (let i = 0 ; i < countries.length ; i++) {
         $('select').append(`<option>${countries[i].name}</option>`)
     }
 
-    function getCountries() {
+    function getCountries(countriesArr) {
         $.ajax({
             type: 'get',
             url: 'https://restcountries.com/v2/all',
@@ -18,7 +18,7 @@ $(document).ready(function() {
                     if (responseCountry[i].capital == undefined) {
                         continue
                     } else {
-                        countries.push({
+                        countriesArr.push({
                             'name':responseCountry[i].name,
                             'capital':responseCountry[i].capital,
                             'callingCode':responseCountry[i].callingCodes[0],
@@ -31,7 +31,7 @@ $(document).ready(function() {
                         })
                     }
                 }
-                countries.sort((a, b) => (a.name > b.name) ? 1 : -1)
+                countriesArr.sort((a, b) => (a.name > b.name) ? 1 : -1)
             }
         })
     }
@@ -74,12 +74,12 @@ $(document).ready(function() {
         
         $('.country-specs').html(
             `<h3 class="bg-dark text-light text-center p-2 rounded-5">${selectedCountry.name}</h3>
-            <p>Native Name: ${selectedCountry.nativeName}</p>
-            <p>Capital: ${selectedCountry.capital}</p>
-            <p>Region: ${selectedCountry.region}</p>
-            <p>Population: ${selectedCountry.population}</p>
-            <p>Languages: ${selectedCountry.languages}</p>
-            <p>Time Zone: ${selectedCountry.timesZone}</p>`
+            <p><span class="text-dark">Native Name:</span> ${selectedCountry.nativeName}</p>
+            <p><span class="text-dark">Capital:</span> ${selectedCountry.capital}</p>
+            <p><span class="text-dark">Region:</span> ${selectedCountry.region}</p>
+            <p><span class="text-dark">Population:</span> ${selectedCountry.population}</p>
+            <p><span class="text-dark">Languages:</span> ${selectedCountry.languages}</p>
+            <p><span class="text-dark">Time Zone:</span> ${selectedCountry.timesZone}</p>`
         )
 
         $('.weather-specs').html(
@@ -88,10 +88,10 @@ $(document).ready(function() {
                 <img class="weather-icon" src="${selectedCapital.icon}">
                 <p>${selectedCapital.description}</p>
             </div>
-            <p>Wind Speed: ${selectedCapital.windSpeed}</p>
-            <p>Temperature: ${selectedCapital.temperature}</p>
-            <p>Humidty: ${selectedCapital.humidity}</p>
-            <p>Visibility: ${selectedCapital.visibility}</p>`
+            <p><span class="text-dark">Wind Speed:</span> ${selectedCapital.windSpeed}</p>
+            <p><span class="text-dark">Temperature:</span> ${selectedCapital.temperature}</p>
+            <p><span class="text-dark">Humidty:</span> ${selectedCapital.humidity}</p>
+            <p><span class="text-dark">Visibility:</span> ${selectedCapital.visibility}</p>`
         )
 
         $('.code').html(
