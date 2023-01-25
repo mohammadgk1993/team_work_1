@@ -10,6 +10,7 @@ iframe {
     width: 100%;
     margin: 0;
 }
-body {
-    background-color: rgb(176, 255, 255);
+.calling-code {
+    padding: 10%;
+    font-size: 200px;
 }
